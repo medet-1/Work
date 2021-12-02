@@ -1,0 +1,119 @@
+﻿@model TeamListViewModel
+
+@{
+
+    Layout = "_Layout2";
+}
+
+<form asp-controller="WorkDetail" enctype="multipart/form-data" asp-action="WorkDetail" method="post">
+
+
+    <div class="row">
+
+        <div class="col-6 ">
+            <label for="WorkID" class="p-3 mb-2 bg-primary text-white">ID</label>
+            <input id="WorkID" name="WorkID" class="form-control" placeholder="ID" />
+        </div>
+
+        <div class=" col-6">
+            <label for="Name" class="p-3 mb-2 bg-primary text-white">İş Adı</label>
+            <input id="Name" name="Name" class="form-control" placeholder="İş Adı" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <label for="TeamID">Takım Adı</label>
+            @*  <input id="TeamID" name="TeamID" class="form-control" placeholder="TeamID" />*@
+            <select name="TeamID" class="form-control kt-select2 w-100" id="kt_form_year">
+                <option></option>
+                @foreach (var item in Model.Team)
+                {
+                    <option value="@item.ID"> @item.Name </option>
+                }
+
+            </select>
+
+        </div>
+
+        <div class="col-4">
+            <label for="StatuID">Statü</label>
+
+
+            <select name="StatuID" class="form-control kt-select2 w-100" id="kt_form_year">
+                <option></option>
+                @foreach (var item in Html.GetEnumSelectList<Core.Enum.StatuEnum>())
+                {
+                    <option value="@item.Value"> @item.Text </option>
+                }
+
+            </select>
+
+        </div>
+
+        <div class="col-4">
+            <label for="StatuID">İş Tipi</label>
+
+
+            <select name="WorkType" class="form-control kt-select2 w-100" id="kt_form_year">
+                <option></option>
+                @foreach (var item in Html.GetEnumSelectList<Core.Enum.WorkType>())
+                {
+                    <option value="@item.Value"> @item.Text </option>
+                }
+
+            </select>
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="Effort">Efor</label>
+        <input id="Effort" name="Effort" class="form-control" placeholder="Efor" />
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+            <label for="Beginning">Başlama Zamanı</label>
+            <input type="date" id="Beginning" name="Beginning" class="form-control" placeholder="Başlama Zamanı" />
+        </div>
+
+        <div class="col-4">
+            <label for="Finish">Bitirme Zamanı</label>
+            <input type="date" id="Finish" name="Finish" class="form-control" placeholder="Bitirme Zamanı" />
+        </div>
+
+
+    </div>
+    <br />
+    <div>
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+
+        </div>
+        <div class="col-5">
+            <input type="submit" value="Save" class="btn btn-success btn-group-sm" />
+        </div>
+        <div class="col-2">
+
+        </div>
+       
+    </div>
+
+
+</form>
+
+
+
+
+

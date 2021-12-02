@@ -1,0 +1,202 @@
+﻿@model WorkListViewModel
+@{
+    var Aylar = new string[] { "Ocak", "Subat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" };
+    
+}
+
+<style>
+
+    table.table.table-responsive > tbody {
+        line-height: 0.6;
+    }
+
+    .tooltip-main {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        font-weight: 700;
+        background: #f3f3f3;
+        border: 1px solid #737373;
+        color: #737373;
+        margin: 4px 121px 0 5px;
+        float: right;
+        text-align: left !important;
+    }
+
+    .tooltip-qm {
+        float: left;
+        margin: -2px 0px 3px 4px;
+        font-size: 12px;
+    }
+
+    .tooltip-inner {
+        max-width: 236px !important;
+        height: 76px;
+        font-size: 12px;
+        padding: 10px 15px 10px 20px;
+        background: #FFFFFF;
+        color: rgba(0, 0, 0, .7);
+        border: 1px solid #737373;
+        text-align: left;
+    }
+
+    .tooltip.show {
+        opacity: 1;
+    }
+
+    .bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+    .bs-tooltip-bottom .arrow::before {
+        border-bottom-color: #f00;
+        /* Red */
+    }
+</style>
+
+<div class="row">
+
+    <div class="col-12">
+
+
+        <div class="row">
+            <div class=" col-7"><h2> İşler</h2></div>
+            <div class="col-5"><h2>Aylar</h2></div>
+        </div>
+
+
+        <table class="table table-responsive" style="overflow-x:hidden">
+
+            <thead>
+                <tr>
+                    
+                    <td>WorkSırası</td>
+                    <td>WorkID</td>
+                    <td>Name</td>
+                    <td>Efor</td>
+                    <td>Takım Adı</td>
+                    <td>StatuID</td>
+                    <td>
+                        <div class=" row">
+                            @foreach (string item in Aylar)
+                            {
+                                <div class="col-1">
+                                    @item
+                                </div>
+                            }
+                        </div>
+                        
+                       
+                    </td>
+
+
+                </tr>
+            </thead>
+            
+            
+         
+
+
+            @foreach (var work in Model.Teams)
+            {
+                <tbody>
+                    <tr>
+                       
+                        <td>@work.ID</td>
+                        <td>@work.WorkID</td>
+                        <td>@work.Name</td>
+                        <td>@work.Effort</td>
+                        <td>@work.TeamName</td>
+                        <td>@work.StatuID</td>
+
+
+
+                        <td style="width:2400px">
+
+                            @if (work.Finish.Year > work.Beginning.Year)
+
+                            {
+
+                                <div class="progress">
+
+                                    @for (int i = 0; i < 365; i++)
+                                    {
+                                        var a = work.Beginning.DayOfYear;
+                                        if (a> i )
+                                        {
+                                            <div class="progress-bar progress-bar-animated bg-light" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="9" style="width: 80%"></div>
+
+                                        }
+
+                                        else
+                                        {
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" data-placement="top" data-toggle="tooltip" title="@work.Beginning.ToString("dd.MM.yyyy") - @work.Finish.ToString("dd.MM.yyyy")" aria-valuenow="3" aria-valuemin="9" aria-valuemax="16" style="width: 80%"> </div>
+
+
+                                        }
+                                    }
+
+                                </div>
+
+
+
+                                
+                            }
+
+
+
+                            else if (work.Beginning.Year == work.Finish.Year)
+                            {
+                                <div class="progress">
+
+                                    @for (int i = 0; i < 365; i++)
+                                    {
+                                        var a = work.Beginning.DayOfYear;
+                                        var b = work.Finish.DayOfYear;
+                                        if (a > i  )
+                                        {
+
+                                            <div class="progress-bar progress-bar-animated bg-light" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="9" style="width: 100%"></div>
+
+                                        }
+                                        else if (b <= i)
+                                        {
+                                            <div class="progress-bar progress-bar-animated bg-light" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="9" style="width: 100%"></div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated showDate" role="progressbar" data-placement="top" data-toggle="tooltip" title="@work.Beginning.ToString("dd.MM.yyyy") - @work.Finish.ToString("dd.MM.yyyy")" aria-valuenow="3" aria-valuemin="9" aria-valuemax="16" style="width: 100%"> </div>
+
+
+                                        }
+                                    }
+
+                                </div>
+                            }
+
+
+
+                        </td>
+
+
+                </tbody>
+
+
+            }
+
+
+        </table>
+
+
+    </div>
+
+
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger: 'hover',
+            delay: { show: 10, hide: 10 },
+
+        });
+    });
+</script>

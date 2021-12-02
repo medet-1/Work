@@ -1,0 +1,80 @@
+﻿@model WorkListViewModel
+@{
+
+    Layout = "_Layout2";
+}
+<div class="row">
+    <div class="col-6">
+        <style>
+            table.table.table-responsive > tbody {
+                line-height: 0.95;
+            }
+        </style>
+
+        <h2> İşler</h2>
+
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <td>WorkSırası</td>
+                    <td>WorkID</td>
+                    <td>Name</td>
+                    <td>Efor</td>
+                    <td>Takım Adı</td>
+                    <td>StatuID</td>
+
+                </tr>
+            </thead>
+
+
+            @foreach (var work in Model.Teams)
+            {
+                <tbody>
+                    <tr>
+
+                        <td>@work.ID</td>
+                        <td>@work.WorkID</td>
+                        <td>@work.Name</td>
+                        <td>@work.Effort</td>
+                        <td>@work.TeamName</td>
+                        <td>@work.StatuID</td>
+
+                        <td></td>
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+   
+
+    <div class="col-2">
+        <h2> Değiştirme</h2>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <td>
+                        Değiştir
+                    </td>
+
+                </tr>
+            </thead>
+        </table>
+        @for (int i = 0; i < Model.Teams.Count(); i++)
+        {
+
+         
+            <input type="submit" value="Değişiklik" class="btn btn-success btn-group-sm" />
+            <br />
+        }
+
+
+    </div>
+
+
+
+
+
+</div>
+        
+  

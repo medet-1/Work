@@ -1,0 +1,44 @@
+﻿@*@model WorkListViewModel
+
+<style>
+    table.table.table-responsive > tbody {
+        line-height: 0.5;
+    }
+
+</style>
+
+<h2> İşler</h2>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td>WorkSırası</td>
+            <td>WorkID</td>
+            <td>Name</td>
+            <td>Efor</td>
+            <td>Takım Adı</td>
+            <td>StatuID</td>
+           
+        </tr>
+    </thead>
+    
+
+    @foreach (var work in Model.Works )
+    {
+        <tbody>
+            <tr>
+
+                <td>@work.ID</td>
+                <td>@work.WorkID</td>
+                <td>@work.Name</td>
+                <td>@work.TeamID</td>
+                <td>@work.Effort</td>
+               
+                <td>@work.StatuID</td>
+
+                <td></td>
+            </tr>
+        </tbody>
+    }
+
+</table>*@
